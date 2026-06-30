@@ -1,0 +1,410 @@
+### ========================================
+### 浏览历史功能测试文件
+### ========================================
+
+### 基础配置
+@baseUrl = http://localhost:8080
+@userId = 1
+@contentType = knowledge
+@contentId = 1
+
+### ========================================
+### 1. 创建浏览记录
+### ========================================
+
+### 1.1 创建知识浏览记录
+POST {{baseUrl}}/api/learning-records
+Content-Type: application/json
+
+{
+  "userId": 1,
+  "contentType": "knowledge",
+  "contentId": 1,
+  "title": "常见网络诈骗类型识别",
+  "summary": "了解常见的网络诈骗类型，提高防范意识"
+}
+
+###
+
+### 1.2 创建案例浏览记录
+POST {{baseUrl}}/api/learning-records
+Content-Type: application/json
+
+{
+  "userId": 1,
+  "contentType": "case",
+  "contentId": 1,
+  "title": "冒充客服诈骗案例",
+  "summary": "某市民接到冒充客服电话被骗10万元"
+}
+
+###
+
+### 1.3 创建帖子浏览记录
+POST {{baseUrl}}/api/learning-records
+Content-Type: application/json
+
+{
+  "userId": 1,
+  "contentType": "post",
+  "contentId": 1,
+  "title": "分享我的防诈骗经验",
+  "summary": "今天差点被骗，分享给大家"
+}
+
+###
+
+### 1.4 批量创建浏览记录（用于测试分页）
+POST {{baseUrl}}/api/learning-records
+Content-Type: application/json
+
+{
+  "userId": 1,
+  "contentType": "knowledge",
+  "contentId": 2,
+  "title": "电信诈骗防范指南",
+  "summary": "学习如何识别和防范电信诈骗"
+}
+
+###
+
+POST {{baseUrl}}/api/learning-records
+Content-Type: application/json
+
+{
+  "userId": 1,
+  "contentType": "knowledge",
+  "contentId": 3,
+  "title": "投资诈骗警示",
+  "summary": "高收益投资往往是诈骗陷阱"
+}
+
+###
+
+POST {{baseUrl}}/api/learning-records
+Content-Type: application/json
+
+{
+  "userId": 1,
+  "contentType": "case",
+  "contentId": 2,
+  "title": "网络贷款诈骗案例",
+  "summary": "轻信网络贷款广告，被骗5万元"
+}
+
+###
+
+POST {{baseUrl}}/api/learning-records
+Content-Type: application/json
+
+{
+  "userId": 1,
+  "contentType": "case",
+  "contentId": 3,
+  "title": "刷单诈骗案例",
+  "summary": "参与刷单兼职，被骗3万元"
+}
+
+###
+
+POST {{baseUrl}}/api/learning-records
+Content-Type: application/json
+
+{
+  "userId": 1,
+  "contentType": "post",
+  "contentId": 2,
+  "title": "如何识别虚假投资平台",
+  "summary": "分享识别虚假投资平台的方法"
+}
+
+###
+
+### ========================================
+### 2. 获取用户的所有浏览记录
+### ========================================
+
+### 2.1 获取用户ID为1的所有浏览记录
+GET {{baseUrl}}/api/learning-records/user/1
+
+###
+
+### 2.2 获取用户ID为2的所有浏览记录（如果存在）
+GET {{baseUrl}}/api/learning-records/user/2
+
+###
+
+### ========================================
+### 3. 分页获取用户的浏览记录
+### ========================================
+
+### 3.1 获取第1页，每页10条记录
+GET {{baseUrl}}/api/learning-records/user/1/page?page=1&size=10
+
+###
+
+### 3.2 获取第2页，每页5条记录
+GET {{baseUrl}}/api/learning-records/user/1/page?page=2&size=5
+
+###
+
+### 3.3 获取第1页，每页3条记录
+GET {{baseUrl}}/api/learning-records/user/1/page?page=1&size=3
+
+###
+
+### ========================================
+### 4. 按内容类型获取用户的浏览记录
+### ========================================
+
+### 4.1 获取用户的知识浏览记录
+GET {{baseUrl}}/api/learning-records/user/1/type/knowledge
+
+###
+
+### 4.2 获取用户的案例浏览记录
+GET {{baseUrl}}/api/learning-records/user/1/type/case
+
+###
+
+### 4.3 获取用户的帖子浏览记录
+GET {{baseUrl}}/api/learning-records/user/1/type/post
+
+###
+
+### ========================================
+### 5. 获取用户最近浏览的记录
+### ========================================
+
+### 5.1 获取用户最近浏览的10条记录（默认）
+GET {{baseUrl}}/api/learning-records/user/1/recent
+
+###
+
+### 5.2 获取用户最近浏览的5条记录
+GET {{baseUrl}}/api/learning-records/user/1/recent?limit=5
+
+###
+
+### 5.3 获取用户最近浏览的3条记录
+GET {{baseUrl}}/api/learning-records/user/1/recent?limit=3
+
+###
+
+### ========================================
+### 6. 统计用户的浏览次数
+### ========================================
+
+### 6.1 统计用户ID为1的总浏览次数
+GET {{baseUrl}}/api/learning-records/user/1/count
+
+###
+
+### 6.2 统计用户ID为2的总浏览次数（如果存在）
+GET {{baseUrl}}/api/learning-records/user/2/count
+
+###
+
+### ========================================
+### 7. 统计用户对指定内容的浏览次数
+### ========================================
+
+### 7.1 统计用户对知识ID为1的浏览次数
+GET {{baseUrl}}/api/learning-records/user/1/count/content?contentType=knowledge&contentId=1
+
+###
+
+### 7.2 统计用户对案例ID为1的浏览次数
+GET {{baseUrl}}/api/learning-records/user/1/count/content?contentType=case&contentId=1
+
+###
+
+### 7.3 统计用户对帖子ID为1的浏览次数
+GET {{baseUrl}}/api/learning-records/user/1/count/content?contentType=post&contentId=1
+
+###
+
+### ========================================
+### 8. 删除浏览记录
+### ========================================
+
+### 8.1 删除指定ID的浏览记录（需要先查询获取ID）
+DELETE {{baseUrl}}/api/learning-records/1
+
+###
+
+### 8.2 删除另一个浏览记录
+DELETE {{baseUrl}}/api/learning-records/2
+
+###
+
+### ========================================
+### 9. 删除用户的所有浏览记录
+### ========================================
+
+### 9.1 删除用户ID为1的所有浏览记录
+DELETE {{baseUrl}}/api/learning-records/user/1
+
+###
+
+### 9.2 删除用户ID为2的所有浏览记录（如果存在）
+DELETE {{baseUrl}}/api/learning-records/user/2
+
+###
+
+### ========================================
+### 10. 综合测试场景
+### ========================================
+
+### 10.1 完整的用户浏览流程测试
+### 步骤1：创建浏览记录
+POST {{baseUrl}}/api/learning-records
+Content-Type: application/json
+
+{
+  "userId": 1,
+  "contentType": "knowledge",
+  "contentId": 1,
+  "title": "测试知识",
+  "summary": "测试摘要"
+}
+
+###
+
+### 步骤2：查询浏览记录
+GET {{baseUrl}}/api/learning-records/user/1
+
+###
+
+### 步骤3：统计浏览次数
+GET {{baseUrl}}/api/learning-records/user/1/count
+
+###
+
+### 步骤4：获取最近浏览记录
+GET {{baseUrl}}/api/learning-records/user/1/recent?limit=5
+
+###
+
+### 步骤5：按类型查询
+GET {{baseUrl}}/api/learning-records/user/1/type/knowledge
+
+###
+
+### 10.2 多用户浏览记录测试
+### 用户1创建浏览记录
+POST {{baseUrl}}/api/learning-records
+Content-Type: application/json
+
+{
+  "userId": 1,
+  "contentType": "knowledge",
+  "contentId": 1,
+  "title": "用户1浏览的知识",
+  "summary": "用户1的浏览记录"
+}
+
+###
+
+### 用户2创建浏览记录
+POST {{baseUrl}}/api/learning-records
+Content-Type: application/json
+
+{
+  "userId": 2,
+  "contentType": "knowledge",
+  "contentId": 1,
+  "title": "用户2浏览的知识",
+  "summary": "用户2的浏览记录"
+}
+
+###
+
+### 分别查询两个用户的浏览记录
+GET {{baseUrl}}/api/learning-records/user/1
+
+###
+
+GET {{baseUrl}}/api/learning-records/user/2
+
+###
+
+### 10.3 分页功能测试
+### 先创建多条浏览记录
+POST {{baseUrl}}/api/learning-records
+Content-Type: application/json
+
+{
+  "userId": 3,
+  "contentType": "knowledge",
+  "contentId": 1,
+  "title": "分页测试1",
+  "summary": "测试分页功能"
+}
+
+###
+
+POST {{baseUrl}}/api/learning-records
+Content-Type: application/json
+
+{
+  "userId": 3,
+  "contentType": "knowledge",
+  "contentId": 2,
+  "title": "分页测试2",
+  "summary": "测试分页功能"
+}
+
+###
+
+POST {{baseUrl}}/api/learning-records
+Content-Type: application/json
+
+{
+  "userId": 3,
+  "contentType": "knowledge",
+  "contentId": 3,
+  "title": "分页测试3",
+  "summary": "测试分页功能"
+}
+
+###
+
+POST {{baseUrl}}/api/learning-records
+Content-Type: application/json
+
+{
+  "userId": 3,
+  "contentType": "knowledge",
+  "contentId": 4,
+  "title": "分页测试4",
+  "summary": "测试分页功能"
+}
+
+###
+
+POST {{baseUrl}}/api/learning-records
+Content-Type: application/json
+
+{
+  "userId": 3,
+  "contentType": "knowledge",
+  "contentId": 5,
+  "title": "分页测试5",
+  "summary": "测试分页功能"
+}
+
+###
+
+### 测试分页查询
+GET {{baseUrl}}/api/learning-records/user/3/page?page=1&size=2
+
+###
+
+GET {{baseUrl}}/api/learning-records/user/3/page?page=2&size=2
+
+###
+
+GET {{baseUrl}}/api/learning-records/user/3/page?page=3&size=2
+
+###

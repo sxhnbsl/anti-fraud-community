@@ -1,0 +1,34 @@
+### 创建举报
+POST http://localhost:8080/api/reports
+Content-Type: application/json
+
+{
+  "reporterId": 1,
+  "reportedType": "post",
+  "reportedId": 1,
+  "reason": "违规内容",
+  "description": "该帖子包含不当言论"
+}
+
+### 获取所有举报
+GET http://localhost:8080/api/reports
+
+### 获取单个举报
+GET http://localhost:8080/api/reports/1
+
+### 获取用户的举报
+GET http://localhost:8080/api/reports/reporter/1
+
+### 按状态获取举报
+GET http://localhost:8080/api/reports/status/pending
+
+### 更新举报状态
+PUT http://localhost:8080/api/reports/1/status
+Content-Type: application/json
+
+{
+  "status": "processed"
+}
+
+### 删除举报
+DELETE http://localhost:8080/api/reports/1

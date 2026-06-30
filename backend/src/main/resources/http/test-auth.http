@@ -1,0 +1,22 @@
+### 测试1: 登录（无需认证）
+POST http://localhost:8080/api/auth/login
+Content-Type: application/json
+
+{
+  "username": "1",
+  "password": "123456"
+}
+
+### 测试2: 获取帖子列表（需要认证，替换YOUR_TOKEN_HERE为实际的token）
+GET http://localhost:8080/api/posts
+Content-Type: application/json
+Authorization: Bearer YOUR_TOKEN_HERE
+
+### 测试3: 未认证访问（应该失败）
+GET http://localhost:8080/api/posts
+Content-Type: application/json
+
+### 测试4: 无效token（应该失败）
+GET http://localhost:8080/api/posts
+Content-Type: application/json
+Authorization: Bearer invalid-token-12345

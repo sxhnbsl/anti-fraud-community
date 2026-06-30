@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.antifraud.repository.UserProfileChangeRepository">
+    
+    <!-- 插入用户资料变更记录 -->
+    <insert id="insert" parameterType="com.antifraud.model.UserProfileChange">
+        INSERT INTO user_profile_changes (
+            user_id, 
+            change_type, 
+            old_value, 
+            new_value, 
+            status, 
+            created_at, 
+            updated_at
+        ) VALUES (
+            #{userId}, 
+            #{changeType}, 
+            #{oldValue}, 
+            #{newValue}, 
+            #{status}, 
+            CURRENT_TIMESTAMP, 
+            CURRENT_TIMESTAMP
+        )
+    </insert>
+    
+    <!-- 根据ID查询用户资料变更记录 -->
+    <select id="findById" parameterType="java.lang.Long" resultType="com.antifraud.model.UserProfileChange">
+        SELECT * FROM user_profile_changes WHERE id = #{id}
+    </select>
+    
+    <!-- 根据用户ID查询变更记录 -->
+    <select id="findByUserId" parameterType="java.lang.Long" resultType="com.antifraud.model.UserProfileChange">
+        SELECT * FROM user_profile_changes WHERE user_id = #{userId} ORDER BY created_at DESC
+    </select>
+    
+    <!-- 根据状态查询变更记录 -->
+    <select id="findByStatus" parameterType="java.lang.String" resultType="com.antifraud.model.UserProfileChange">
+        SELECT * FROM user_profile_changes WHERE status = #{status} ORDER BY created_at DESC
+    </select>
+    
+    <!-- 更新审核状态 -->
+    <update id="updateStatus" parameterType="map">
+        UPDATE user_profile_changes 
+        SET status = #{status}, updated_at = CURRENT_TIMESTAMP 
+        WHERE id = #{id}
+    </update>
+    
+    <!-- 删除变更记录 -->
+    <delete id="deleteById" parameterType="java.lang.Long">
+        DELETE FROM user_profile_changes WHERE id = #{id}
+    </delete>
+    
+</mapper>

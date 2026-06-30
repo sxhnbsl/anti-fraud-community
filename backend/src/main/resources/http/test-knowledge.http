@@ -1,0 +1,23 @@
+### 创建知识
+POST http://localhost:8080/api/knowledge
+Content-Type: application/json
+
+{
+  "title": "如何防范电信诈骗",
+  "content": "电信诈骗的常见手法和防范措施...",
+  "category": "防诈骗知识",
+  "tags": "电信诈骗,防范措施",
+  "authorId": 1
+}
+
+### 获取所有知识
+GET http://localhost:8080/api/knowledge
+
+### 获取单个知识
+GET http://localhost:8080/api/knowledge/1
+
+### 点赞知识
+POST http://localhost:8080/api/knowledge/1/like
+
+### 删除知识
+DELETE http://localhost:8080/api/knowledge/1

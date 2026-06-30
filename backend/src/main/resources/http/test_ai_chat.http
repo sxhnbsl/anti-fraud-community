@@ -1,0 +1,319 @@
+### ========================================
+### AI防诈骗问答功能测试文件
+### ========================================
+
+### 基础配置
+@baseUrl = http://localhost:8080
+@userId = 1
+
+### ========================================
+### 1. 创建新会话
+### ========================================
+
+### 1.1 创建新的AI对话会话
+POST {{baseUrl}}/api/ai/session
+
+###
+
+### ========================================
+### 2. AI问答功能测试
+### ========================================
+
+### 2.1 识别诈骗风险 - 电信诈骗
+POST {{baseUrl}}/api/ai/chat
+Content-Type: application/json
+
+{
+  "question": "有人打电话说是公安局的，说我涉嫌洗钱，要我转账到安全账户，这是诈骗吗？",
+  "sessionId": ""
+}
+
+###
+
+### 2.2 识别诈骗风险 - 网络诈骗
+POST {{baseUrl}}/api/ai/chat
+Content-Type: application/json
+
+{
+  "question": "网上有人让我刷单返利，说每单能赚50元，这是真的吗？",
+  "sessionId": ""
+}
+
+###
+
+### 2.3 识别诈骗风险 - 投资诈骗
+POST {{baseUrl}}/api/ai/chat
+Content-Type: application/json
+
+{
+  "question": "有个投资平台说日收益10%，保本保息，可以投资吗？",
+  "sessionId": ""
+}
+
+###
+
+### 2.4 识别诈骗风险 - 交友诈骗
+POST {{baseUrl}}/api/ai/chat
+Content-Type: application/json
+
+{
+  "question": "网上认识一个朋友，说在国外遇到困难，让我借钱帮忙，应该怎么办？",
+  "sessionId": ""
+}
+
+###
+
+### 2.5 防范建议 - 如何防范电信诈骗
+POST {{baseUrl}}/api/ai/chat
+Content-Type: application/json
+
+{
+  "question": "如何防范电信诈骗？",
+  "sessionId": ""
+}
+
+###
+
+### 2.6 防范建议 - 如何识别虚假投资
+POST {{baseUrl}}/api/ai/chat
+Content-Type: application/json
+
+{
+  "question": "如何识别虚假投资平台？",
+  "sessionId": ""
+}
+
+###
+
+### 2.7 知识普及 - 什么是杀猪盘
+POST {{baseUrl}}/api/ai/chat
+Content-Type: application/json
+
+{
+  "question": "什么是杀猪盘诈骗？",
+  "sessionId": ""
+}
+
+###
+
+### 2.8 知识普及 - 常见诈骗手段
+POST {{baseUrl}}/api/ai/chat
+Content-Type: application/json
+
+{
+  "question": "常见的网络诈骗手段有哪些？",
+  "sessionId": ""
+}
+
+###
+
+### 2.9 紧急求助 - 已经被骗了怎么办
+POST {{baseUrl}}/api/ai/chat
+Content-Type: application/json
+
+{
+  "question": "我已经被骗了5万元，应该怎么办？",
+  "sessionId": ""
+}
+
+###
+
+### 2.10 紧急求助 - 正在转账中
+POST {{baseUrl}}/api/ai/chat
+Content-Type: application/json
+
+{
+  "question": "我正在给对方转账，突然觉得不对劲，应该怎么办？",
+  "sessionId": ""
+}
+
+###
+
+### ========================================
+### 3. 多轮对话测试
+### ========================================
+
+### 3.1 第一轮对话
+POST {{baseUrl}}/api/ai/chat
+Content-Type: application/json
+
+{
+  "question": "什么是电信诈骗？",
+  "sessionId": "session-001"
+}
+
+###
+
+### 3.2 第二轮对话（基于上下文）
+POST {{baseUrl}}/api/ai/chat
+Content-Type: application/json
+
+{
+  "question": "那具体有哪些常见的电信诈骗手段？",
+  "sessionId": "session-001"
+}
+
+###
+
+### 3.3 第三轮对话（基于上下文）
+POST {{baseUrl}}/api/ai/chat
+Content-Type: application/json
+
+{
+  "question": "如果遇到这些情况，应该怎么防范？",
+  "sessionId": "session-001"
+}
+
+###
+
+### ========================================
+### 4. 获取对话历史
+### ========================================
+
+### 4.1 获取指定会话的历史记录
+GET {{baseUrl}}/api/ai/history?sessionId=session-001&limit=20
+
+###
+
+### 4.2 获取用户所有对话历史
+GET {{baseUrl}}/api/ai/history?limit=50
+
+###
+
+### ========================================
+### 5. 清除对话历史
+### ========================================
+
+### 5.1 清除指定会话的历史
+DELETE {{baseUrl}}/api/ai/history?sessionId=session-001
+
+###
+
+### 5.2 清除用户所有对话历史
+DELETE {{baseUrl}}/api/ai/history
+
+###
+
+### ========================================
+### 6. 综合测试场景
+### ========================================
+
+### 6.1 完整的防诈骗咨询流程
+### 步骤1：创建新会话
+POST {{baseUrl}}/api/ai/session
+
+###
+
+### 步骤2：询问诈骗识别
+POST {{baseUrl}}/api/ai/chat
+Content-Type: application/json
+
+{
+  "question": "有人打电话说我中奖了，要先交税，这是诈骗吗？",
+  "sessionId": "test-session-001"
+}
+
+###
+
+### 步骤3：询问防范措施
+POST {{baseUrl}}/api/ai/chat
+Content-Type: application/json
+
+{
+  "question": "那应该怎么防范这种诈骗？",
+  "sessionId": "test-session-001"
+}
+
+###
+
+### 步骤4：查看对话历史
+GET {{baseUrl}}/api/ai/history?sessionId=test-session-001&limit=10
+
+###
+
+### 6.2 多场景测试
+### 场景1：冒充客服
+POST {{baseUrl}}/api/ai/chat
+Content-Type: application/json
+
+{
+  "question": "淘宝客服打电话说我的订单有问题，要退款，让我点链接，这是真的吗？",
+  "sessionId": "scenario-001"
+}
+
+###
+
+### 场景2：冒充领导
+POST {{baseUrl}}/api/ai/chat
+Content-Type: application/json
+
+{
+  "question": "公司领导在微信上让我转账，说是急用，应该怎么办？",
+  "sessionId": "scenario-002"
+}
+
+###
+
+### 场景3：网络贷款
+POST {{baseUrl}}/api/ai/chat
+Content-Type: application/json
+
+{
+  "question": "网上有贷款平台说无抵押、秒到账，是真的吗？",
+  "sessionId": "scenario-003"
+}
+
+###
+
+### 场景4：刷单返利
+POST {{baseUrl}}/api/ai/chat
+Content-Type: application/json
+
+{
+  "question": "有人让我刷单，说每单返利5%，可以相信吗？",
+  "sessionId": "scenario-004"
+}
+
+###
+
+### 场景5：虚假投资
+POST {{baseUrl}}/api/ai/chat
+Content-Type: application/json
+
+{
+  "question": "有个微信群推荐股票，说内幕消息，保赚不赔，是真的吗？",
+  "sessionId": "scenario-005"
+}
+
+###
+
+### ========================================
+### 测试说明
+### ========================================
+### 
+### 使用方法：
+### 1. 确保后端服务已启动（默认端口8080）
+### 2. 确保已配置DeepSeek API Key（在application.yaml中）
+### 3. 确保数据库中已创建chat_history表
+### 4. 按顺序执行测试用例，或根据需要选择执行
+### 5. 使用IDE的HTTP Client插件执行请求
+### 
+### 注意事项：
+### - 测试前请确保DeepSeek API Key已正确配置
+### - 测试前请确保数据库中已创建chat_history表
+### - 多轮对话测试时，使用相同的sessionId
+### - 清除历史操作不可恢复，请谨慎使用
+### - API调用可能需要几秒钟，请耐心等待
+### 
+### 预期结果：
+### - 所有POST请求应返回200状态码和AI回答
+### - 所有GET请求应返回200状态码和对话历史
+### - 所有DELETE请求应返回200状态码
+### - AI回答应该专业、准确、易懂
+### - 多轮对话应该保持上下文连贯性
+### 
+### 常见问题排查：
+### - 如果返回"AI助手暂时无法回答"，请检查API Key配置
+### - 如果返回超时错误，请检查网络连接
+### - 如果对话历史为空，请确认sessionId是否正确
+### 

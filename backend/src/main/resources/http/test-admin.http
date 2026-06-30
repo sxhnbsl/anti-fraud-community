@@ -1,0 +1,98 @@
+### 1. 管理员登录
+POST http://localhost:8080/api/admin/login
+Content-Type: application/json
+
+{
+  "username": "admin",
+  "password": "123456"
+}
+
+> {%
+    client.global.set("token", response.body.token);
+    client.global.set("authHeader", "Bearer " + response.body.token);
+%}
+
+### 2. 获取统计数据
+GET http://localhost:8080/api/admin/stats
+Authorization: {{authHeader}}
+
+### 3. 获取用户列表
+GET http://localhost:8080/api/admin/users
+Authorization: {{authHeader}}
+
+### 4. 更新用户（需要替换 {id} 为实际用户ID）
+PUT http://localhost:8080/api/admin/users/8
+Authorization: {{authHeader}}
+Content-Type: application/json
+
+{
+  "username": "updated_user",
+  "email": "updated@example.com",
+  "role": "USER"
+}
+
+### 5. 删除用户（需要替换 {id} 为实际用户ID）
+DELETE http://localhost:8080/api/admin/users/8
+Authorization: {{authHeader}}
+
+### 6. 获取知识库列表
+GET http://localhost:8080/api/admin/knowledge
+Authorization: {{authHeader}}
+
+### 7. 新增知识库
+POST http://localhost:8080/api/admin/knowledge
+Authorization: {{authHeader}}
+Content-Type: application/json
+
+{
+  "title": "常见诈骗类型",
+  "content": "这是关于常见诈骗类型的详细说明...",
+  "category": "防骗知识"
+}
+
+### 8. 删除知识库（需要替换 {id} 为实际知识库ID）
+DELETE http://localhost:8080/api/admin/knowledge/1
+Authorization: {{authHeader}}
+
+### 9. 获取案例列表
+GET http://localhost:8080/api/admin/cases
+Authorization: {{authHeader}}
+
+### 10. 新增案例（已修正字段名）
+POST http://localhost:8080/api/admin/cases
+Authorization: {{authHeader}}
+Content-Type: application/json
+
+{
+  "title": "网络购物诈骗案例",
+  "content": "某用户在网上购物时遭遇诈骗，损失了5000元...",
+  "category": "网络诈骗",
+  "fraudType": "购物诈骗",
+  "victimInfo": "30岁，北京",
+  "warningTips": "警惕低价诱惑，选择正规平台"
+}
+
+### 11. 删除案例（需要替换 {id} 为实际案例ID）
+DELETE http://localhost:8080/api/admin/cases/1
+Authorization: {{authHeader}}
+
+### 12. 获取帖子列表
+GET http://localhost:8080/api/admin/posts
+Authorization: {{authHeader}}
+
+### 13. 删除帖子（需要替换 {id} 为实际帖子ID）
+DELETE http://localhost:8080/api/admin/posts/1
+Authorization: {{authHeader}}
+
+### 14. 获取举报列表
+GET http://localhost:8080/api/admin/reports
+Authorization: {{authHeader}}
+
+### 15. 更新举报状态（需要替换 {id} 为实际举报ID）
+PUT http://localhost:8080/api/admin/reports/1/status
+Authorization: {{authHeader}}
+Content-Type: application/json
+
+{
+  "status": "RESOLVED"
+}

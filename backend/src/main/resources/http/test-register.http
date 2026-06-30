@@ -1,0 +1,9 @@
+### 注册临时用户
+POST http://localhost:8080/api/auth/register
+Content-Type: application/json
+
+{
+  "username": "tempuser",
+  "password": "123456",
+  "nickname": "临时用户"
+}

@@ -1,0 +1,83 @@
+### 收藏功能 HTTP 测试文件
+
+### 前置步骤：先登录获取 token（替换为你的登录接口）
+POST http://localhost:8080/api/auth/login
+Content-Type: application/json
+
+{
+  "username": "1",
+  "password": "123456"
+}
+
+> {% client.global.set("auth_token", response.body.token); %}
+
+### 1. 收藏知识库文章（需要先登录获取token）
+POST http://localhost:8080/api/collections/toggle
+Content-Type: application/json
+Authorization: Bearer {{auth_token}}
+
+{
+  "userId": 7,
+  "targetId": 1,
+  "type": "knowledge",
+  "title": "如何识别电信诈骗",
+  "summary": "电信诈骗的常见手段和防范方法"
+}
+
+### 2. 收藏案例
+POST http://localhost:8080/api/collections/toggle
+Content-Type: application/json
+Authorization: Bearer {{auth_token}}
+
+{
+  "userId": 7,
+  "targetId": 1,
+  "type": "case",
+  "title": "某大学生被骗案例",
+  "summary": "一名大学生因刷单被骗的详细经过"
+}
+
+### 3. 检查是否已收藏（知识库）
+GET http://localhost:8080/api/collections/check/knowledge/1?userId=7
+Authorization: Bearer {{auth_token}}
+
+### 4. 检查是否已收藏（案例）
+GET http://localhost:8080/api/collections/check/case/1?userId=7
+Authorization: Bearer {{auth_token}}
+
+### 5. 获取用户收藏列表
+GET http://localhost:8080/api/collections?userId=7
+Authorization: Bearer {{auth_token}}
+
+### 6. 取消收藏（通过 toggle 接口再次调用）
+POST http://localhost:8080/api/collections/toggle
+Content-Type: application/json
+Authorization: Bearer {{auth_token}}
+
+{
+  "userId": 7,
+  "targetId": 1,
+  "type": "knowledge",
+  "title": "如何识别电信诈骗",
+  "summary": "电信诈骗的常见手段和防范方法"
+}
+
+### 7. 删除指定收藏（通过收藏ID删除）
+DELETE http://localhost:8080/api/collections/1
+Authorization: Bearer {{auth_token}}
+
+### 8. 未认证访问收藏接口（应该失败）
+GET http://localhost:8080/api/collections?userId=7
+
+### 9. 测试收藏重复添加（应该自动切换）
+POST http://localhost:8080/api/collections/toggle
+Content-Type: application/json
+Authorization: Bearer {{auth_token}}
+
+{
+  "userId": 7,
+  "targetId": 2,
+  "type": "knowledge",
+  "title": "另一个知识库文章",
+  "summary": "这是另一篇文章的摘要"
+}

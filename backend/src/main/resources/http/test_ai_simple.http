@@ -1,0 +1,180 @@
+### ========================================
+### AI防诈骗问答功能 - 简化测试
+### ========================================
+
+### 基础配置
+@baseUrl = http://localhost:8080
+
+### ========================================
+### 0. 用户登录（获取Token）
+### ========================================
+
+### 0.1 登录获取JWT Token
+POST {{baseUrl}}/api/auth/login
+Content-Type: application/json
+
+{
+  "username": "testuser",
+  "password": "123456"
+}
+
+### 登录成功后，将返回的token复制到下面
+@token = YOUR_TOKEN_HERE
+
+### ========================================
+### 1. 创建新会话
+### ========================================
+
+### 1.1 创建新的AI对话会话
+POST {{baseUrl}}/api/ai/session
+Authorization: Bearer {{token}}
+
+###
+
+### ========================================
+### 2. AI问答核心测试
+### ========================================
+
+### 2.1 识别诈骗风险 - 冒充公检法
+POST {{baseUrl}}/api/ai/chat
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "question": "有人打电话说是公安局的，说我涉嫌洗钱，要我转账到安全账户，这是诈骗吗？",
+  "sessionId": ""
+}
+
+###
+
+### 2.2 识别诈骗风险 - 刷单返利
+POST {{baseUrl}}/api/ai/chat
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "question": "网上有人让我刷单返利，说每单能赚50元，这是真的吗？",
+  "sessionId": ""
+}
+
+###
+
+### 2.3 识别诈骗风险 - 虚假投资
+POST {{baseUrl}}/api/ai/chat
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "question": "有个投资平台说日收益10%，保本保息，可以投资吗？",
+  "sessionId": ""
+}
+
+###
+
+### 2.4 防范建议 - 如何防范电信诈骗
+POST {{baseUrl}}/api/ai/chat
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "question": "如何防范电信诈骗？",
+  "sessionId": ""
+}
+
+###
+
+### 2.5 知识普及 - 什么是杀猪盘
+POST {{baseUrl}}/api/ai/chat
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "question": "什么是杀猪盘诈骗？",
+  "sessionId": ""
+}
+
+###
+
+### 2.6 紧急求助 - 已经被骗了怎么办
+POST {{baseUrl}}/api/ai/chat
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "question": "我已经被骗了5万元，应该怎么办？",
+  "sessionId": ""
+}
+
+###
+
+### ========================================
+### 3. 多轮对话测试
+### ========================================
+
+### 3.1 第一轮对话
+POST {{baseUrl}}/api/ai/chat
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "question": "什么是电信诈骗？",
+  "sessionId": "test-session-001"
+}
+
+###
+
+### 3.2 第二轮对话（基于上下文）
+POST {{baseUrl}}/api/ai/chat
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "question": "那具体有哪些常见的电信诈骗手段？",
+  "sessionId": "test-session-001"
+}
+
+###
+
+### 3.3 第三轮对话（基于上下文）
+POST {{baseUrl}}/api/ai/chat
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "question": "如果遇到这些情况，应该怎么防范？",
+  "sessionId": "test-session-001"
+}
+
+###
+
+### ========================================
+### 4. 查询对话历史
+### ========================================
+
+### 4.1 获取指定会话的历史记录
+GET {{baseUrl}}/api/ai/history?sessionId=test-session-001&limit=10
+Authorization: Bearer {{token}}
+
+###
+
+### 4.2 获取用户所有对话历史
+GET {{baseUrl}}/api/ai/history?limit=20
+Authorization: Bearer {{token}}
+
+###
+
+### ========================================
+### 5. 清除对话历史
+### ========================================
+
+### 5.1 清除指定会话的历史
+DELETE {{baseUrl}}/api/ai/history?sessionId=test-session-001
+Authorization: Bearer {{token}}
+
+###
+
+### 5.2 清除用户所有对话历史
+DELETE {{baseUrl}}/api/ai/history
+Authorization: Bearer {{token}}
+
+###

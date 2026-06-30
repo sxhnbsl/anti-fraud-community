@@ -1,0 +1,114 @@
+### 反诈骗平台 API 测试文件
+### 基础URL
+@baseUrl = http://localhost:8080/api
+@token = your_jwt_token_here
+
+### ==================== 帖子接口 ====================
+
+### 1. 获取帖子列表（无需审核消耗）
+GET {{baseUrl}}/posts
+Content-Type: application/json
+
+### 2. 获取帖子详情（无需审核消耗）
+GET {{baseUrl}}/posts/6
+Content-Type: application/json
+
+### 3. 创建帖子 - 正常内容（会触发审核）
+POST {{baseUrl}}/posts
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "title": "防诈骗小贴士",
+  "content": "这是正常的帖子内容，分享防诈骗知识。",
+  "authorId": 1,
+  "authorName": "测试用户",
+  "category": "防骗知识"
+}
+
+### 4. 内容审核接口 - 测试一次即可
+POST {{baseUrl}}/posts/check-content
+Content-Type: application/json
+
+{
+  "content": "这是需要审核的测试内容"
+}
+
+### ==================== 管理端 - 帖子审核 ====================
+
+### 5. 获取所有帖子（管理端）
+GET {{baseUrl}}/posts/admin/all
+Content-Type: application/json
+
+### 6. 获取待审核帖子
+GET {{baseUrl}}/posts/admin/status/PENDING
+Content-Type: application/json
+
+### 7. 审核通过帖子
+POST {{baseUrl}}/posts/admin/1/audit
+Content-Type: application/json
+
+{
+  "auditStatus": "APPROVED",
+  "auditRemark": "内容合规，审核通过"
+}
+
+### 8. 审核拒绝帖子
+POST {{baseUrl}}/posts/admin/1/audit
+Content-Type: application/json
+
+{
+  "auditStatus": "REJECTED",
+  "auditRemark": "内容不符合规范"
+}
+
+### ==================== 评论接口 ====================
+
+### 9. 获取帖子评论列表（无需审核消耗）
+GET {{baseUrl}}/comments/post/1
+Content-Type: application/json
+
+### 10. 创建评论 - 正常内容（会触发审核）
+POST {{baseUrl}}/comments
+Content-Type: application/json
+
+{
+  "postId": 1,
+  "authorId": 1,
+  "content": "这是一条正常的评论内容",
+  "parentId": null
+}
+
+### ==================== 管理端 - 评论审核 ====================
+
+### 11. 获取所有评论（管理端）
+GET {{baseUrl}}/comments/admin/all
+Content-Type: application/json
+
+### 12. 获取待审核评论
+GET {{baseUrl}}/comments/admin/status/PENDING
+Content-Type: application/json
+
+### 13. 审核通过评论
+POST {{baseUrl}}/comments/admin/1/audit
+Content-Type: application/json
+
+{
+  "auditStatus": "APPROVED",
+  "auditRemark": "评论内容合规"
+}
+
+### ==================== 其他基础接口 ====================
+
+### 14. 点赞帖子
+POST {{baseUrl}}/posts/1/like
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+### 15. 删除帖子
+DELETE {{baseUrl}}/posts/1
+Content-Type: application/json
+
+### 16. 删除评论
+DELETE {{baseUrl}}/comments/1
+Content-Type: application/json

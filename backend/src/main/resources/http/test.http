@@ -1,0 +1,184 @@
+### ========== 1. 用户认证模块 ==========
+
+### 1.1 用户注册
+POST http://localhost:8080/api/auth/register
+Content-Type: application/json
+
+{
+  "username": "testuser",
+  "password": "123456",
+  "nickname": "测试用户",
+  "phone": "13800138000",
+  "email": "test@example.com"
+}
+
+### 1.2 用户登录
+POST http://localhost:8080/api/auth/login
+Content-Type: application/json
+
+{
+  "username": "testuser",
+  "password": "123456"
+}
+
+### ========== 2. 防诈骗案例模块 ==========
+
+### 2.1 创建案例
+POST http://localhost:8080/api/cases
+Content-Type: application/json
+
+{
+  "title": "网络刷单诈骗案例",
+  "content": "某用户在网上看到刷单广告，承诺高额返利，结果被骗5000元",
+  "category": "网络诈骗",
+  "fraudType": "刷单诈骗",
+  "victimInfo": "受害者为大学生，损失金额5000元",
+  "warningTips": "不要相信任何刷单兼职，都是诈骗",
+  "authorId": 1
+}
+
+### 2.2 获取所有案例
+GET http://localhost:8080/api/cases
+
+### 2.3 获取单个案例
+GET http://localhost:8080/api/cases/7
+
+### 2.4 按分类获取案例（使用URL编码）
+GET http://localhost:8080/api/cases/category/%E7%BD%91%E7%BB%9C%E8%AF%88%E9%AA%97
+
+### 2.5 点赞案例
+POST http://localhost:8080/api/cases/7/like
+
+### ========== 3. 社区帖子模块 ==========
+
+### 3.1 创建帖子
+POST http://localhost:8080/api/posts
+Content-Type: application/json
+
+{
+  "title": "如何识别网络诈骗",
+  "content": "分享一些识别网络诈骗的技巧和经验",
+  "authorId": 1
+}
+
+### 3.2 获取所有帖子
+GET http://localhost:8080/api/posts
+
+### 3.3 获取单个帖子
+GET http://localhost:8080/api/posts/1
+
+### 3.4 获取用户帖子
+GET http://localhost:8080/api/posts/author/1
+
+### 3.5 点赞帖子
+POST http://localhost:8080/api/posts/1/like
+
+### ========== 4. 评论模块 ==========
+
+### 4.1 创建评论
+POST http://localhost:8080/api/comments
+Content-Type: application/json
+
+{
+  "postId": 1,
+  "authorId": 1,
+  "content": "非常有用的分享，谢谢！",
+  "parentId": null
+}
+
+### 4.2 创建回复评论
+POST http://localhost:8080/api/comments
+Content-Type: application/json
+
+{
+  "postId": 1,
+  "authorId": 1,
+  "content": "同意楼上观点",
+  "parentId": 1
+}
+
+### 4.3 获取帖子评论
+GET http://localhost:8080/api/comments/post/1
+
+### 4.4 点赞评论
+POST http://localhost:8080/api/comments/1/like
+
+### ========== 5. 防诈骗知识模块 ==========
+
+### 5.1 创建知识
+POST http://localhost:8080/api/knowledge
+Content-Type: application/json
+
+{
+  "title": "如何防范电信诈骗",
+  "content": "电信诈骗的常见手法和防范措施，包括冒充公检法、中奖诈骗等",
+  "category": "防诈骗知识",
+  "tags": "电信诈骗,防范措施",
+  "authorId": 1
+}
+
+### 5.2 获取所有知识
+GET http://localhost:8080/api/knowledge
+
+### 5.3 获取单个知识
+GET http://localhost:8080/api/knowledge/3
+
+### 5.4 按分类获取知识（使用URL编码）
+GET http://localhost:8080/api/knowledge/category/%E9%98%B2%E8%AF%88%E8%AF%88%E7%9F%A5%E8%AF%86
+
+### 5.5 按标签获取知识（使用URL编码）
+GET http://localhost:8080/api/knowledge/tag/%E7%94%B5%E4%BF%A1%E8%AF%88%E9%AA%97
+
+### 5.6 点赞知识
+POST http://localhost:8080/api/knowledge/3/like
+
+### ========== 6. 举报模块 ==========
+
+### 6.1 创建举报
+POST http://localhost:8080/api/reports
+Content-Type: application/json
+
+{
+  "reporterId": 1,
+  "reportedType": "post",
+  "reportedId": 1,
+  "reason": "违规内容",
+  "description": "该帖子包含不当言论"
+}
+
+### 6.2 获取所有举报
+GET http://localhost:8080/api/reports
+
+### 6.3 获取单个举报
+GET http://localhost:8080/api/reports/3
+
+### 6.4 获取用户举报
+GET http://localhost:8080/api/reports/reporter/1
+
+### 6.5 按状态获取举报
+GET http://localhost:8080/api/reports/status/pending
+
+### 6.6 更新举报状态
+PUT http://localhost:8080/api/reports/1/status
+Content-Type: application/json
+
+{
+  "status": "processed"
+}
+
+### ========== 清理测试数据 ==========
+
+### 删除评论
+DELETE http://localhost:8080/api/comments/1
+
+### 删除帖子
+DELETE http://localhost:8080/api/posts/1
+
+### 删除知识
+DELETE http://localhost:8080/api/knowledge/1
+
+### 删除案例
+DELETE http://localhost:8080/api/cases/1
+
+### 删除举报
+DELETE http://localhost:8080/api/reports/1

@@ -1,0 +1,221 @@
+{
+	"pages": [
+		{
+			"path": "pages/login/login",
+			"style": {
+				"navigationBarTitleText": "登录"
+			}
+		},
+		{
+			"path": "pages/register/register",
+			"style": {
+				"navigationBarTitleText": "注册"
+			}
+		},
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": "防诈骗科普平台",
+				"enablePullDownRefresh": true
+			}
+		},
+		{
+			"path": "pages/knowledge/knowledge",
+			"style": {
+				"navigationBarTitleText": "防诈骗知识库",
+				"enablePullDownRefresh": true
+			}
+		},
+		{
+			"path": "pages/knowledge/detail/detail",
+			"style": {
+				"navigationBarTitleText": "知识详情"
+			}
+		},
+		{
+			"path": "pages/case/case",
+			"style": {
+				"navigationBarTitleText": "真实案例展示",
+				"enablePullDownRefresh": true
+			}
+		},
+		{
+			"path": "pages/case/detail/detail",
+			"style": {
+				"navigationBarTitleText": "案例详情"
+			}
+		},
+		{
+			"path": "pages/test/test",
+			"style": {
+				"navigationBarTitleText": "防诈骗测试"
+			}
+		},
+		{
+			"path": "pages/test/questions/questions",
+			"style": {
+				"navigationBarTitleText": "测试题目"
+			}
+		},
+		{
+			"path": "pages/test/result/result",
+			"style": {
+				"navigationBarTitleText": "测试结果"
+			}
+		},
+		{
+			"path": "pages/community/community",
+			"style": {
+				"navigationBarTitleText": "社区",
+				"enablePullDownRefresh": true
+			}
+		},
+		{
+			"path": "pages/community/createPost/createPost",
+			"style": {
+				"navigationBarTitleText": "发布帖子",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/community/comment/comment",
+			"style": {
+				"navigationBarTitleText": "评论",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/community/detail/detail",
+			"style": {
+				"navigationBarTitleText": "帖子详情"
+			}
+		},
+		{
+			"path": "pages/report/report",
+			"style": {
+				"navigationBarTitleText": "一键举报"
+			}
+		},
+		{
+			"path": "pages/report/result/result",
+			"style": {
+				"navigationBarTitleText": "举报结果",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/report/history/history",
+			"style": {
+				"navigationBarTitleText": "举报历史",
+				"navigationStyle": "custom",
+				"enablePullDownRefresh": true
+			}
+		},
+		{
+			"path": "pages/webview/webview",
+			"style": {
+				"navigationBarTitleText": "外部链接"
+			}
+		},
+		{
+			"path": "pages/profile/profile",
+			"style": {
+				"navigationBarTitleText": "个人中心"
+			}
+		},
+		{
+			"path": "pages/profile/settings/settings",
+			"style": {
+				"navigationBarTitleText": "账号设置"
+			}
+		},
+		{
+			"path": "pages/profile/editProfile/editProfile",
+			"style": {
+				"navigationBarTitleText": "编辑个人资料"
+			}
+		},
+		{
+			"path": "pages/profile/changePassword/changePassword",
+			"style": {
+				"navigationBarTitleText": "修改密码"
+			}
+		},
+		{
+			"path": "pages/profile/myPosts/myPosts",
+			"style": {
+				"navigationBarTitleText": "我的帖子"
+			}
+		},
+		{
+			"path": "pages/profile/collections/collections",
+			"style": {
+				"navigationBarTitleText": "我的收藏"
+			}
+		},
+		{
+			"path": "pages/profile/learningHistory/learningHistory",
+			"style": {
+				"navigationBarTitleText": "浏览历史"
+			}
+		},
+		{
+			"path": "pages/ai/chat/chat",
+			"style": {
+				"navigationBarTitleText": "AI防诈骗助手",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/checkin/checkin",
+			"style": {
+				"navigationBarTitleText": "每日签到"
+			}
+		}
+	],
+	"globalStyle": {
+		"navigationBarTextStyle": "white",
+		"navigationBarBackgroundColor": "#667eea",
+		"navigationBarTitleText": "防诈骗科普平台",
+		"backgroundColor": "#F8F8F8"
+	},
+	"tabBar": {
+		"color": "#999999",
+		"selectedColor": "#667eea",
+		"backgroundColor": "#ffffff",
+		"borderStyle": "white",
+		"list": [
+			{
+				"pagePath": "pages/index/index",
+				"text": "首页",
+				"iconPath": "static/tabbar/home.png",
+				"selectedIconPath": "static/tabbar/home.png"
+			},
+			{
+				"pagePath": "pages/knowledge/knowledge",
+				"text": "知识库",
+				"iconPath": "static/tabbar/knowledge.png",
+				"selectedIconPath": "static/tabbar/knowledge.png"
+			},
+			{
+				"pagePath": "pages/case/case",
+				"text": "案例",
+				"iconPath": "static/tabbar/case.png",
+				"selectedIconPath": "static/tabbar/case.png"
+			},
+			{
+				"pagePath": "pages/community/community",
+				"text": "社区",
+				"iconPath": "static/tabbar/community.png",
+				"selectedIconPath": "static/tabbar/community.png"
+			},
+			{
+				"pagePath": "pages/profile/profile",
+				"text": "我的",
+				"iconPath": "static/tabbar/profile.png",
+				"selectedIconPath": "static/tabbar/profile.png"
+			}
+		]
+	},
+	"uniIdRouter": {}
+}

@@ -1,0 +1,297 @@
+### 测试1：正常内容审核 - 预期通过 (PASS)
+POST http://localhost:8080/api/posts/check-content
+Content-Type: application/json
+
+{
+  "content": "这是一个正常的测试内容，用于验证内容审核功能是否正常工作。"
+}
+
+###
+
+### 测试2：脏话/侮辱性词汇 - 预期拒绝 (REJECT)
+POST http://localhost:8080/api/posts/check-content
+Content-Type: application/json
+
+{
+  "content": "你他妈真是个傻缺"
+}
+
+###
+
+### 测试3：微信关键词 - 预期拒绝 (REJECT)
+POST http://localhost:8080/api/posts/check-content
+Content-Type: application/json
+
+{
+  "content": "加我微信：test123"
+}
+
+###
+
+### 测试4：VX关键词 - 预期拒绝 (REJECT)
+POST http://localhost:8080/api/posts/check-content
+Content-Type: application/json
+
+{
+  "content": "加v：wx_test_123"
+}
+
+###
+
+### 测试5：手机号 - 预期拒绝 (REJECT)
+POST http://localhost:8080/api/posts/check-content
+Content-Type: application/json
+
+{
+  "content": "手机号：13800138000"
+}
+
+###
+
+### 测试6：QQ关键词 - 预期拒绝 (REJECT)
+POST http://localhost:8080/api/posts/check-content
+Content-Type: application/json
+
+{
+  "content": "加我qq：123456789"
+}
+
+###
+
+### 测试7：邮箱关键词 - 预期拒绝 (REJECT)
+POST http://localhost:8080/api/posts/check-content
+Content-Type: application/json
+
+{
+  "content": "邮箱：test@qq.com"
+}
+
+###
+
+### 测试8：联系方式组合 - 预期拒绝 (REJECT)
+POST http://localhost:8080/api/posts/check-content
+Content-Type: application/json
+
+{
+  "content": "联系我，微信wxid_abc123，或者qq123456789"
+}
+
+###
+
+### 测试9：二维码/扫码 - 预期拒绝 (REJECT)
+POST http://localhost:8080/api/posts/check-content
+Content-Type: application/json
+
+{
+  "content": "扫码添加好友"
+}
+
+###
+
+### 测试10：加群关键词 - 预期拒绝 (REJECT)
+POST http://localhost:8080/api/posts/check-content
+Content-Type: application/json
+
+{
+  "content": "加群一起交流"
+}
+
+###
+
+### 测试11：兼职/日结 - 预期拒绝 (REJECT)
+POST http://localhost:8080/api/posts/check-content
+Content-Type: application/json
+
+{
+  "content": "兼职日结，轻松赚钱"
+}
+
+###
+
+### 测试12：贷款/借钱 - 预期拒绝 (REJECT)
+POST http://localhost:8080/api/posts/check-content
+Content-Type: application/json
+
+{
+  "content": "急需借钱，高利息"
+}
+
+###
+
+### 测试13：刷单/刷钻 - 预期拒绝 (REJECT)
+POST http://localhost:8080/api/posts/check-content
+Content-Type: application/json
+
+{
+  "content": "专业刷单，信誉保证"
+}
+
+###
+
+### 测试14：代理/代练 - 预期拒绝 (REJECT)
+POST http://localhost:8080/api/posts/check-content
+Content-Type: application/json
+
+{
+  "content": "代练游戏，快速上分"
+}
+
+###
+
+### 测试15：办证/发票 - 预期拒绝 (REJECT)
+POST http://localhost:8080/api/posts/check-content
+Content-Type: application/json
+
+{
+  "content": "代开发票，办证刻章"
+}
+
+###
+
+### 测试16：英语脏话 - 预期拒绝 (REJECT)
+POST http://localhost:8080/api/posts/check-content
+Content-Type: application/json
+
+{
+  "content": "fuck you, you are a shit"
+}
+
+###
+
+### 测试17：成人内容 - 预期拒绝 (REJECT)
+POST http://localhost:8080/api/posts/check-content
+Content-Type: application/json
+
+{
+  "content": "成人用品，壮阳延时"
+}
+
+###
+
+### 测试18：投资/理财 - 预期拒绝 (REJECT)
+POST http://localhost:8080/api/posts/check-content
+Content-Type: application/json
+
+{
+  "content": "投资理财，高收益回报"
+}
+
+###
+
+### 测试19：空内容审核 - 预期通过 (PASS)
+POST http://localhost:8080/api/posts/check-content
+Content-Type: application/json
+
+{
+  "content": ""
+}
+
+###
+
+### 测试20：长文本审核 - 预期通过 (PASS)
+POST http://localhost:8080/api/posts/check-content
+Content-Type: application/json
+
+{
+  "content": "这是一段较长的测试文本，用于验证内容审核功能对长文本的处理能力。反欺诈社区平台致力于为用户提供安全、可靠的信息交流环境。我们通过多种技术手段，包括AI智能审核、人工审核等方式，确保平台内容的质量和安全性。用户在发布内容时，系统会自动进行内容安全检测，识别和过滤违规内容，保护用户免受不良信息的影响。"
+}
+
+###
+
+### 测试21：包含链接的内容审核 - 预期通过 (PASS)
+POST http://localhost:8080/api/posts/check-content
+Content-Type: application/json
+
+{
+  "content": "这是一个包含链接的测试内容，请访问 https://www.example.com 了解更多信息。"
+}
+
+###
+
+### 测试22：包含特殊字符的内容审核 - 预期通过 (PASS)
+POST http://localhost:8080/api/posts/check-content
+Content-Type: application/json
+
+{
+  "content": "测试特殊字符：@#$%^&amp;*()_+-=[]{}|;':\",./&lt;&gt;?"
+}
+
+###
+
+### 测试23：包含数字和符号的内容审核 - 预期通过 (PASS)
+POST http://localhost:8080/api/posts/check-content
+Content-Type: application/json
+
+{
+  "content": "1"
+}
+
+###
+
+### 测试24：包含中英文混合的内容审核 - 预期通过 (PASS)
+POST http://localhost:8080/api/posts/check-content
+Content-Type: application/json
+
+{
+  "content": "This is a test with mixed Chinese and English text. 这是一个中英文混合的测试内容。"
+}
+
+###
+
+### 测试25：包含表情符号的内容审核 - 预期通过 (PASS)
+POST http://localhost:8080/api/posts/check-content
+Content-Type: application/json
+
+{
+  "content": "这是一个包含表情符号的测试内容 😊👍❤️🎉"
+}
+
+###
+
+### 测试26：包含换行符的内容审核 - 预期通过 (PASS)
+POST http://localhost:8080/api/posts/check-content
+Content-Type: application/json
+
+{
+  "content": "这是第一行\n这是第二行\n这是第三行"
+}
+
+###
+
+### 测试27：Telegram关键词 - 预期拒绝 (REJECT)
+POST http://localhost:8080/api/posts/check-content
+Content-Type: application/json
+
+{
+  "content": "tg账号：@test_user"
+}
+
+###
+
+### 测试28：抖音/油管 - 预期拒绝 (REJECT)
+POST http://localhost:8080/api/posts/check-content
+Content-Type: application/json
+
+{
+  "content": "抖音号：test_tiktok"
+}
+
+###
+
+### 测试29：免费领/返利 - 预期拒绝 (REJECT)
+POST http://localhost:8080/api/posts/check-content
+Content-Type: application/json
+
+{
+  "content": "免费领，返利高"
+}
+
+###
+
+### 测试30：赌博相关 - 预期拒绝 (REJECT)
+POST http://localhost:8080/api/posts/check-content
+Content-Type: application/json
+
+{
+  "content": "网赌平台，六合彩时时彩"
+}
